@@ -14,11 +14,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column
     private String email;
 
+    @Column
     private String username;
 
+    @Column
     private String password;
 
+    @Column
+    private String firstname;
+
+    @Column
+    private String lastname;
+
+    @Column
+    private String nickname;
+
+    @Column
+    private boolean active;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> roles;
 }

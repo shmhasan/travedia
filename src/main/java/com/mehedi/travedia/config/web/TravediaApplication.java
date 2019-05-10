@@ -1,7 +1,16 @@
 package com.mehedi.travedia.config.web;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.mehedi.travedia.config.database.HibernateConfig;
+import com.mehedi.travedia.config.security.AppSecurity;
+import com.mehedi.travedia.dao.auth.UserDao;
+import com.mehedi.travedia.model.auth.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -14,6 +23,8 @@ import javax.servlet.ServletRegistration;
 
 
 @Configuration
+@PropertySource("classpath:application.properties")
+@Import(AppSecurity.class)
 public class TravediaApplication implements WebApplicationInitializer {
 
 
@@ -22,7 +33,8 @@ public class TravediaApplication implements WebApplicationInitializer {
 
 		AnnotationConfigWebApplicationContext  rootContext = new AnnotationConfigWebApplicationContext();
 
-		rootContext.scan("com.mehedi");
+		rootContext.register(App.class, HibernateConfig.class, AppSecurity.class);
+//		rootContext.scan("com.mehedi");
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 
 		ServletRegistration.Dynamic appServlet =
@@ -30,5 +42,6 @@ public class TravediaApplication implements WebApplicationInitializer {
 
 		appServlet.setLoadOnStartup(1);
 		appServlet.addMapping("/");
+
 	}
 }
