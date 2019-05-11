@@ -13,19 +13,27 @@
         <a class="btn teal" href="/auth/login">Login</a>
     </div>
 
-    <div class="row">
-      <div class="col s12 m7">
-        <div class="card darken-1">
-          <div class="card-content black-text">
-            <p>
-              <h4>Name</h4>
-              status chillllldf fdljkdsf
-            at Sylhet
-            </p>
+    <th:block th:each="post : ${posts}">
+      <div class="row" >
+        <div class="col s12 m7">
+          <div class="card darken-1">
+            <div class="card-content black-text">
+
+              <h4 th:text="${post.author.username}"></h4>
+              <small>at <span th:text="${post.location.name}"></span></small>
+              <p th:text="${post.content}">
+
+              </p>
+              <p th:if="${loggedIn && post.author.username == loggedInUsername}">
+                <a th:href="@{/post/edit?i=} + ${post.id}" >Edit Post</a>
+                <a th:href="@{/posts/delete?id=} + ${post.id}" th:attr="data-id=${post.id}" class="delete-post">Delete</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </th:block>
+
   </div>
 
 <div th:replace="layout :: footer-scripts"></div>
@@ -34,6 +42,27 @@
       var elems = document.querySelectorAll('select');
       var options = {};
       var instances = M.FormSelect.init(elems, options);
+    });
+
+    $(document).on('click', '.delete-post', function (e) {
+        e.preventDefault();
+        var id = $(e.target).data('id');
+
+        console.log("Delete ID", id);
+        $.ajax({
+            url: '/posts/delete?id='+id,
+            type: 'DELETE',
+            success: function(result) {
+                // Do something with the result
+                console.log("delete",result);
+                if(result && result.code === 200) {
+                    window.location.reload();
+                }else {
+                    alert("Could not delete post");
+                }
+            }
+        });
+
     });
 
 

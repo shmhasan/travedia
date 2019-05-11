@@ -16,4 +16,9 @@ public class LocationService {
     public List<Location> findAll() {
         return locationDao.findAll();
     }
+
+    public Location findById(long location) {
+
+        return locationDao.findById(location);
+    }
 }

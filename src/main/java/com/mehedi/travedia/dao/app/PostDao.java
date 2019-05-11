@@ -14,4 +14,11 @@ public interface PostDao {
     void save(Post post);
 
     List<Post> findPublicPosts();
+
+    Post findById(long postId);
+
+    void update(Post post);
+
+    void remove(Post post);
+
 }

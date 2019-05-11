@@ -45,6 +45,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/auth/register").permitAll()
                 .antMatchers("/rest/posts").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
