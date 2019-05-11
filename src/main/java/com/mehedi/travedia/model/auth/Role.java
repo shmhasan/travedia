@@ -17,6 +17,10 @@ public class Role {
     @Column
     private String name;
 
+    public Role() {
+
+    }
+
     public Role(int i, String role_user) {
 
     }

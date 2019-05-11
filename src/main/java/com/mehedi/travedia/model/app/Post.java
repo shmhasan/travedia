@@ -4,12 +4,13 @@ import com.mehedi.travedia.model.auth.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "contents")
 @Data
-public class Post {
+public class Post implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,6 +29,9 @@ public class Post {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @Column(name = "privacy")
+    private int privacy;
 
     @OneToOne
     private User author;

@@ -8,24 +8,31 @@
 
 <div class="container">
     <div class="row">
-        <form class="col lg6" th:action="@{/auth/register}" method="post">
+        <div th:if="${hasError}">
+            You have error in form
+        </div>
+        <form class="col lg12" th:action="@{/auth/register}" th:object="${user}" method="post">
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" name="email" class="validate" autocomplete="off">
+                            <input type="email" th:field="*{email}" class="validate" autocomplete="off">
                             <label for="email">Email</label>
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error
+                                Error</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="username" name="username" type="text" class="validate" autocomplete="off">
+                            <input th:field="*{username}" type="text" class="validate" autocomplete="off">
                             <label for="username">Username</label>
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error
+                                Error</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="password" type="password" name="password" class="validate" autocomplete="off">
+                            <input th:field="*{password}" name="password" class="validate" autocomplete="off">
                             <label for="password">Password</label>
                         </div>
                     </div>

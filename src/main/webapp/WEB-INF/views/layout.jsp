@@ -4,11 +4,15 @@
     <title>Application</title>
   <div th:fragment="header-css">
     <link rel="stylesheet" href="/static/design/css/materialize.min.css">
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
   </div>
 </head>
 <body>
 
-  <div th:fragment="navigation">
+  <div th:if="${loggedIn}" th:fragment="navigation">
     <div th:if="${true}">
       <div class="navbar-fixed">
         <nav>
@@ -17,6 +21,7 @@
             <ul class="right hide-on-med-and-down">
               <li><a href="#/">Posts</a></li>
               <li><a href="#/">Profile</a></li>
+              <li><a href="/logout">Logout</a></li>
             </ul>
           </div>
         </nav>

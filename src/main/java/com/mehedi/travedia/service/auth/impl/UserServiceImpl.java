@@ -27,7 +27,19 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public void save(UserDto userDto) {
+    public User findByUsername(String username) {
+        return userDao.getUserbyUsername(username);
+    }
+
+    @Override
+    public void save(UserDto userDto) throws Exception {
+
+        //find if user already available
+        User userbyUsername = userDao.getUserbyUsername(userDto.getUsername());
+        if(userbyUsername != null) {
+            throw new Exception("User already available");
+        }
+
         User user = new User();
         user.setActive(true);
         user.setUsername(userDto.getUsername());

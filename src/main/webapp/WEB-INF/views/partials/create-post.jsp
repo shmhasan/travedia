@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:fragment="create-post">
-        <div class="row">
+    <div th:fragment="create-post" >
+        <div class="row" th:if="${loggedIn}">
             <div class="col s12 m7">
                 <div class="card darken-1">
 
@@ -23,8 +23,6 @@
                             <div class="input-field col s12">
                                 <select name="location" id="location">
                                     <option value="" selected>Select location</option>
-                                    <option value="sylhet">Sylhet</option>
-                                    <option value="dhaka">Dhaka</option>
                                 </select>
                                 <label for="location">Location</label>
                             </div>
@@ -36,13 +34,22 @@
                 </div>
             </div>
         </div>
+        <script src="/static/app/post.js"></script>
         <script type="text/javascript">
-            function post() {
-                console.log("Posint");
-                var status = document.getElementById("status").value;
-                var location = document.getElementById("location").value;
-                alert(status + location);
-            }
+            $(document).ready(function() {
+                $.get("/rest/location", function (data) {
+                    console.log(data);
+                    var dom = "";
+                    for(var i=0; i< data.length; i++) {
+                        var item = data[i];
+                        dom += '<option value="'+item.id+'">'+item.name+'</option>';
+                    };
+                     $("#location").append(dom);
+                    var elems = document.querySelectorAll('select');
+                    var options = {};
+                    var instances = M.FormSelect.init(elems, options);
+                });
+            });
         </script>
     </div>
 

@@ -9,6 +9,9 @@
   <div th:replace="layout :: navigation"></div>
   <div class="container">
     <div th:replace="partials/create-post :: create-post"></div>
+    <div th:if="${!loggedIn}">
+        <a class="btn teal" href="/auth/login">Login</a>
+    </div>
 
     <div class="row">
       <div class="col s12 m7">
@@ -32,6 +35,8 @@
       var options = {};
       var instances = M.FormSelect.init(elems, options);
     });
+
+
   </script>
 </body>
 </html>

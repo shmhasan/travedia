@@ -43,10 +43,14 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/register").permitAll()
+                .antMatchers("/auth/login").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/rest/posts").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
-                .and().formLogin().loginPage("/auth/login").loginProcessingUrl("/auth/login").permitAll()
+                .and().
+                    formLogin()
+                        .loginPage("/auth/login").permitAll()
                 .and().logout().logoutSuccessUrl("/auth/login").permitAll()
                 .and().csrf().disable();
 
