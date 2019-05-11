@@ -85,6 +85,18 @@ public class PostController {
         int postId = 0;
         Post post = null;
         boolean hasError = false;
+
+        if(principal != null) {
+            uiModel.addAttribute("loggedIn", true);
+            uiModel.addAttribute("loggedInUsername", principal.getName());
+
+
+
+        }else {
+            uiModel.addAttribute("loggedIn", false);
+            uiModel.addAttribute("loggedInUsername", null);
+        }
+
         if(postIdStr != null && !"".equals(postIdStr)) {
             try {
                 postId = Integer.parseInt(postIdStr);

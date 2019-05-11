@@ -7,12 +7,14 @@
 </head>
 <body>
 <div th:replace="layout :: navigation"></div>
+
+
 <div class="container">
     <div class="row">
         <div class="col s12">
 
             <form class="status" name="updatePostForm" method="post" action="/" id="updatePostForm" th:object="${post}">
-                <span class="card-title">Create Post</span>
+                <span class="card-title">Edit Post</span>
 
                 <div class="content">
                     <div id="errorCreatePost">

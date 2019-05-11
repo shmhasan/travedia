@@ -12,37 +12,64 @@
 
     <div class="row">
         <div class="col s3">
-            User Information
-            <ul class="collection">
-                <li class="collection-item avatar">
-                    <img src="images/yuna.jpg" alt="" class="circle">
-                    <span class="title" th:text="${profile.firstname}"></span>
-                    <span class="title" th:text="${profile.lastname}"></span>
-                    <p>
-                        <small th:text="${profile.username}"></small>
-                        <br>
-                        <small th:text="${profile.email}"></small>
-                    </p>
-                </li>
-            </ul>
+            <div class="card">
+                <div class="card-content black-text">
+                    <div class="row">
+                        <div class="col s3">
+                            <img src="/static/images/img_avatar.png" class="avatar" alt="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <table>
+                               <tr>
+                                   <th>Username</th>
+                                   <td><span th:text="${profile.username}"></span></td>
+                               </tr>
+                                <tr>
+                                    <th>Firstname</th>
+                                    <td><span th:text="${profile.firstname}"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Lastname</th>
+                                    <td><span th:text="${profile.lastname}"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td><span th:text="${profile.email}"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col s9">
-            <h4>Posts</h4>
+            <h4>My Posts</h4>
             <hr>
             <th:block th:each="post : ${posts}">
                 <div class="row" >
                     <div class="col s12">
+
                         <div class="card darken-1">
                             <div class="card-content black-text">
-
-                                <h4 th:text="${post.author.username}"></h4>
-                                <small>at <span th:text="${post.location.name}"></span></small>
+                                <div class="row">
+                                    <div class="col s3">
+                                        <img src="/static/images/img_avatar.png" class="avatar" alt="">
+                                        <div class="information">
+                                            <strong th:text="${post.author.username}"></strong>
+                                            <br>
+                                            <small><strong><i class="tiny material-icons">location_city</i> <span th:text="${post.location.name}"></span></strong></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <p th:text="${post.content}">
 
                                 </p>
                                 <p th:if="${loggedIn && post.author.username == profile.username}">
-                                    <a th:href="@{/post/edit?i=} + ${post.id}" >Edit Post</a>
-                                    <a th:href="@{/posts/delete?id=} + ${post.id}" th:attr="data-id=${post.id}" class="delete-post">Delete</a>
+                                    <a th:href="@{/post/edit?i=} + ${post.id}" ><i class="material-icons small">create</i></a>
+                                    <a th:href="@{/posts/delete?id=} + ${post.id}" th:attr="data-id=${post.id}" class="delete-post"><i class="material-icons small">delete</i></a>
                                 </p>
                             </div>
                         </div>
@@ -56,14 +83,5 @@
 
 
 <div th:replace="layout :: footer-scripts"></div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var options = {};
-        var instances = M.FormSelect.init(elems, options);
-    });
-
-
-</script>
 </body>
 </html>

@@ -11,7 +11,7 @@
     <div th:fragment="create-post" >
         <div class="row" th:if="${loggedIn}">
 
-            <div class="col s12">
+            <div class="col s12 m6 l6 offset-m3 offset-l3">
                 <form class="status" name="createpostForm" method="post" action="/" id="createUpdatePost">
                     <span class="card-title">Create Post</span>
 
@@ -46,8 +46,7 @@
                         </div>
                         <div class="row">
                             <div class="col s6">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                                    <i class="material-icons right">send</i>
+                                <button class="btn waves-effect waves-light purple darken-3" type="submit" name="action">Post
                                 </button>
                             </div>
                         </div>

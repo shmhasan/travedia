@@ -3,12 +3,12 @@
     <title>Login</title>
     <div th:replace="layout :: header-css"></div>
 </head>
-<body>
+<body style="background: #722d96 !important;">
 
 
   <div class="container">
     <div class="row">
-      <form class="col lg6" name="f" action="/auth/login" method="post">
+      <form class="col s12 m6 offset-m3 l4 offset-l3" style="margin-top: 23%;" name="f" action="/auth/login" method="post">
         <div th:if="${param.error}" class="alert alert-error">
           Invalid username and password.
         </div>
@@ -16,6 +16,7 @@
           You have been logged out.
         </div>
         <div class="card blue-grey darken-1">
+          <div class="card-title">Travedia</div>
           <div class="card-content white-text">
             <div class="row">
               <div class="input-field col s12">
@@ -29,8 +30,8 @@
                 <label for="password">Password</label>
               </div>
             </div>
-            <button class="btn teal" type="submit" style="width: 100%;">Login</button>
-            <a href="/auth/register">Register</a>
+            <button class="btn purple darken-3" type="submit" style="width: 100%;">Login</button>
+            <a href="/auth/register">Click here to Register</a>
           </div>
         </div>
       </form>
